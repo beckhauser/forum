@@ -1,6 +1,6 @@
 package br.com.beckhauser.forum.DTO;
 
-import br.com.beckhauser.forum.modelo.Topico;
+import br.com.beckhauser.forum.models.Topico;
 
 import java.time.LocalDateTime;
 import java.util.List;

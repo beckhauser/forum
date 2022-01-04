@@ -1,6 +1,6 @@
 package br.com.beckhauser.forum.repository;
 
-import br.com.beckhauser.forum.modelo.Topico;
+import br.com.beckhauser.forum.models.Topico;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
