@@ -1,4 +1,4 @@
-package br.com.beckhauser.forum.modelo;
+package br.com.beckhauser.forum.models;
 
 public enum StatusTopico {
 	
