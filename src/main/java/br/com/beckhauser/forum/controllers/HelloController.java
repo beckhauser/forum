@@ -1,4 +1,4 @@
-package br.com.beckhauser.forum.controller;
+package br.com.beckhauser.forum.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

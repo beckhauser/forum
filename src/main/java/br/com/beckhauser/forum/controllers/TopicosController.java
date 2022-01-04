@@ -1,26 +1,26 @@
-package br.com.beckhauser.forum.controller;
+package br.com.beckhauser.forum.controllers;
 
 import br.com.beckhauser.forum.DTO.TopicoDTO;
-import br.com.beckhauser.forum.modelo.Curso;
-import br.com.beckhauser.forum.modelo.Topico;
+import br.com.beckhauser.forum.controllers.forms.TopicoForm;
+import br.com.beckhauser.forum.models.Topico;
+import br.com.beckhauser.forum.repository.CursoRepository;
 import br.com.beckhauser.forum.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/topicos")
-public class TopicoController {
+public class TopicosController {
 
     @Autowired
     private TopicoRepository topicoRepository;
 
+    @Autowired
+    private CursoRepository cursoRepository;
+
+    @GetMapping
     public List<TopicoDTO> lista(String nomeCurso) {
         if(nomeCurso == null){
             System.out.println(nomeCurso);
@@ -30,6 +30,12 @@ public class TopicoController {
             List<Topico> topicos = topicoRepository.findByCursoNome(nomeCurso);
             return TopicoDTO.converter(topicos);
         }
+    }
+
+    @PostMapping
+    public void cadastrar(@RequestBody TopicoForm form){
+        Topico topico = form.converter(cursoRepository);
+        topicoRepository.save(topico);
 
     }
 }

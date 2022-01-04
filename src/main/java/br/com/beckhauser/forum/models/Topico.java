@@ -1,4 +1,4 @@
-package br.com.beckhauser.forum.modelo;
+package br.com.beckhauser.forum.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,6 +23,15 @@ public class Topico {
 	private Curso curso;
 	@OneToMany(mappedBy = "topico")
 	private List<Resposta> respostas = new ArrayList<>();
+
+	public Topico(String titulo, String mensagem, Curso curso) {
+		titulo = this.titulo;
+		mensagem = this.mensagem;
+		curso = this.curso;
+	}
+
+	public Topico() {
+	}
 
 	@Override
 	public int hashCode() {
