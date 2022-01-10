@@ -1,6 +1,7 @@
 package br.com.beckhauser.forum.controllers;
 
-import br.com.beckhauser.forum.DTO.TopicoDTO;
+import br.com.beckhauser.forum.controllers.DTO.DetalhesDoTopicoDTO;
+import br.com.beckhauser.forum.controllers.DTO.TopicoDTO;
 import br.com.beckhauser.forum.controllers.forms.TopicoForm;
 import br.com.beckhauser.forum.models.Topico;
 import br.com.beckhauser.forum.repository.CursoRepository;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -26,7 +28,6 @@ public class TopicosController {
     @GetMapping
     public List<TopicoDTO> lista(String nomeCurso) {
         if(nomeCurso == null){
-            System.out.println(nomeCurso);
             List<Topico> topicos = topicoRepository.findAll();
             return TopicoDTO.converter(topicos);
         } else {
@@ -36,11 +37,20 @@ public class TopicosController {
     }
 
     @PostMapping
-    public ResponseEntity<TopicoDTO> cadastrar(@RequestBody TopicoForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<TopicoDTO> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder){
         Topico topico = form.converter(cursoRepository);
         topicoRepository.save(topico);
 
         URI uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(uri).body(new TopicoDTO(topico));
     }
+
+    @GetMapping("/{id}")
+    public DetalhesDoTopicoDTO detalhar(@PathVariable Long id) {
+        Topico topico = topicoRepository.getById(id);
+
+        return new DetalhesDoTopicoDTO(topico);
+    }
+
+
 }
