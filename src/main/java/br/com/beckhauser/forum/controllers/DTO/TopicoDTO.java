@@ -1,4 +1,4 @@
-package br.com.beckhauser.forum.DTO;
+package br.com.beckhauser.forum.controllers.DTO;
 
 import br.com.beckhauser.forum.models.Topico;
 
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TopicoDTO {
+
     private Long id;
     private String titulo;
     private String mensagem;
