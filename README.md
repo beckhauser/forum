@@ -40,7 +40,7 @@ Technologies that I used to develop this application
 **Clone the project and access the folder**
 
 ```bash
-$ git clone https://github.com/beckhauser/forum && cd forum
+$ git clone https://github.com/beckhauser/forum-api && cd forum-api
 ```
 
 **Install dependencies**
