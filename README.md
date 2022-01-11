@@ -57,6 +57,11 @@ $ mvn install
 # In the directory there is a script that updates the database every time you start the application
 # To finish, run the api service
 - right-click on class ForumApplication and click in Run 'ForumApplication'
+# or
+
+$ mvn package
+
+$ java -jar (SNAPSHOT-NAME).jar
 
 # Well done, project is started!
 ```
