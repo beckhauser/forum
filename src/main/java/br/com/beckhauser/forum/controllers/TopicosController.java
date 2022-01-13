@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/topicos")
@@ -49,28 +50,38 @@ public class TopicosController {
     }
 
     @GetMapping("/{id}")
-    public DetalhesDoTopicoDTO detalhar(@PathVariable Long id) {
-        Topico topico = topicoRepository.getById(id);
+    public ResponseEntity<DetalhesDoTopicoDTO> detalhar(@PathVariable Long id) {
+        Optional<Topico> topico = topicoRepository.findById(id);
 
-        return new DetalhesDoTopicoDTO(topico);
+        if(topico.isPresent())
+            return ResponseEntity.ok(new DetalhesDoTopicoDTO(topico.get()));
+        else
+            return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<TopicoDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form){
-        Topico topico = form.atualizar(id, topicoRepository);
+    public ResponseEntity<TopicoDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form) {
+        Optional<Topico> idTopico = topicoRepository.findById(id);
 
-        return ResponseEntity.ok(new TopicoDTO(topico));
+        if (idTopico.isPresent()) {
+            Topico topico = form.atualizar(id, topicoRepository);
+            return ResponseEntity.ok(new TopicoDTO(topico));
+        }
+
+        return ResponseEntity.notFound().build();
+
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<?> remover(@PathVariable Long id){
-        topicoRepository.deleteById(id);
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        Optional<Topico> idTopico = topicoRepository.findById(id);
 
-        return ResponseEntity.ok().build();
+        if (idTopico.isPresent()) {
+            topicoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
-
-
-
 }
