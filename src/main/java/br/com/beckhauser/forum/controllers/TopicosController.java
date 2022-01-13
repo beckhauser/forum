@@ -2,6 +2,7 @@ package br.com.beckhauser.forum.controllers;
 
 import br.com.beckhauser.forum.controllers.DTO.DetalhesDoTopicoDTO;
 import br.com.beckhauser.forum.controllers.DTO.TopicoDTO;
+import br.com.beckhauser.forum.controllers.forms.AtualizacaoTopicoForm;
 import br.com.beckhauser.forum.controllers.forms.TopicoForm;
 import br.com.beckhauser.forum.models.Topico;
 import br.com.beckhauser.forum.repository.CursoRepository;
@@ -50,6 +51,13 @@ public class TopicosController {
         Topico topico = topicoRepository.getById(id);
 
         return new DetalhesDoTopicoDTO(topico);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TopicoDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoTopicoForm form){
+        Topico topico = form.atualizar(id, topicoRepository);
+
+        return ResponseEntity.ok(new TopicoDTO(topico));
     }
 
 
