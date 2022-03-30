@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  <img src="https://cdn-icons.flaticon.com/png/512/2602/premium/2602380.png?token=exp=1641942341~hmac=72c77758469725b831787825544a3791" alt="Logo" height="70">
+  <img src="http://cdn.onlinewebfonts.com/svg/img_569498.png" alt="Logo" height="70">
 </h1>
 
 <h3 align="center">
